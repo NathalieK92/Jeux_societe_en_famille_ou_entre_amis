@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tarot à 5 joueurs</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -18,7 +19,7 @@
     }
 
     header {
-      padding: 25px 15px;
+      padding: 30px 15px;
       background: #102b22;
       border-bottom: 3px solid #d6b66b;
     }
@@ -41,6 +42,11 @@
       margin: 20px 0;
       border-radius: 16px;
       box-shadow: 0 5px 15px #0003;
+    }
+
+    .illustration {
+      font-size: 3.5em;
+      margin: 15px 0;
     }
 
     .bouton {
@@ -76,26 +82,40 @@
 <body>
   <header>
     <h1>♠ Tarot à 5 joueurs ♠</h1>
-    <p>Un jeu de cartes en famille ou entre amis</p>
+    <p>Le plaisir de jouer ensemble !</p>
   </header>
 
   <main>
     <section class="carte">
+      <div class="illustration">🃏</div>
       <h2>Bienvenue à la table de tarot !</h2>
-      <p>Préparez-vous à jouer à cinq et à partager un bon moment.</p>
-      <p>Notre table de jeu sera construite progressivement.</p>
-      <button class="bouton" onclick="demarrer()">Commencer</button>
+      <p>
+        Préparez-vous à partager une partie de tarot
+        en famille ou entre amis.
+      </p>
+      <button class="bouton" onclick="demarrer()">
+        Commencer
+      </button>
       <p id="message"></p>
     </section>
 
     <section class="carte">
-      <h2>Le tarot à 5</h2>
+      <h2>Le tarot à 5 joueurs</h2>
       <p>Le jeu se pratique avec 78 cartes.</p>
-      <p>Un joueur prend et joue contre les quatre autres, avec un partenaire déterminé par l'excuse ou un roi appelé selon les règles.</p>
-      <p>Les règles détaillées et la vraie table de jeu seront ajoutées ensuite.</p>
+      <p>
+        Un joueur prend et joue contre les quatre autres.
+        Il peut appeler un roi pour désigner son partenaire,
+        selon les règles du tarot à cinq.
+      </p>
+      <p>
+        Nous construirons progressivement la véritable table
+        de jeu et les fonctionnalités pour jouer.
+      </p>
     </section>
 
-    <a class="bouton" href="index.html">← Retour au menu</a>
+    <a class="bouton" href="index.html">
+      ← Retour au menu principal
+    </a>
   </main>
 
   <footer>
@@ -105,7 +125,7 @@
   <script>
     function demarrer() {
       document.getElementById("message").textContent =
-        "Bienvenue ! La prochaine étape sera de créer la table de jeu.";
+        "Bienvenue ! La table de jeu sera bientôt disponible.";
     }
   </script>
 </body>
