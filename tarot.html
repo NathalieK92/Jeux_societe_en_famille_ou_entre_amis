@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarot à 5 joueurs</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #173d30;
+      color: #fff8e8;
+      text-align: center;
+    }
+
+    header {
+      padding: 25px 15px;
+      background: #102b22;
+      border-bottom: 3px solid #d6b66b;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      color: #f1d58c;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .carte {
+      background: #fff8e8;
+      color: #243b30;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px #0003;
+    }
+
+    .bouton {
+      display: inline-block;
+      padding: 13px 22px;
+      margin: 8px;
+      background: #d6b66b;
+      color: #173d30;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .bouton:hover {
+      background: #f1d58c;
+    }
+
+    #message {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    footer {
+      padding: 20px;
+      color: #e8dfc8;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>♠ Tarot à 5 joueurs ♠</h1>
+    <p>Un jeu de cartes en famille ou entre amis</p>
+  </header>
+
+  <main>
+    <section class="carte">
+      <h2>Bienvenue à la table de tarot !</h2>
+      <p>Préparez-vous à jouer à cinq et à partager un bon moment.</p>
+      <p>Notre table de jeu sera construite progressivement.</p>
+      <button class="bouton" onclick="demarrer()">Commencer</button>
+      <p id="message"></p>
+    </section>
+
+    <section class="carte">
+      <h2>Le tarot à 5</h2>
+      <p>Le jeu se pratique avec 78 cartes.</p>
+      <p>Un joueur prend et joue contre les quatre autres, avec un partenaire déterminé par l'excuse ou un roi appelé selon les règles.</p>
+      <p>Les règles détaillées et la vraie table de jeu seront ajoutées ensuite.</p>
+    </section>
+
+    <a class="bouton" href="index.html">← Retour au menu</a>
+  </main>
+
+  <footer>
+    Jeux de société en famille ou entre amis
+  </footer>
+
+  <script>
+    function demarrer() {
+      document.getElementById("message").textContent =
+        "Bienvenue ! La prochaine étape sera de créer la table de jeu.";
+    }
+  </script>
+</body>
+</html>
