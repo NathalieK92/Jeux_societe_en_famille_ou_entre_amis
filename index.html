@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Jeux de société en famille ou entre amis</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -12,194 +14,206 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5efe5;
-      color: #38291f;
+      background: #f5ead8;
+      color: #382719;
     }
 
     header {
-      background: #38291f;
-      color: #f8e6c7;
+      background: #563923;
+      color: #fff2d9;
       text-align: center;
-      padding: 35px 20px;
+      padding: 35px 15px;
     }
 
     header h1 {
       margin: 0 0 12px;
-      font-size: 2rem;
+      font-size: 2.2em;
     }
 
     header p {
       margin: 0;
-      font-size: 1.05rem;
+      font-size: 1.1em;
     }
 
     nav {
+      background: #3d281b;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
-      background: #fffaf2;
-      padding: 18px;
-      border-bottom: 1px solid #e4d5c3;
+      gap: 10px;
+      padding: 15px;
     }
 
     nav a {
-      color: #7b342a;
+      color: #fff2d9;
       text-decoration: none;
-      font-weight: bold;
-      padding: 8px 12px;
+      padding: 10px 15px;
+      border-radius: 6px;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background: #795438;
     }
 
     main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 30px 20px;
+      max-width: 1100px;
+      margin: 35px auto;
+      padding: 0 20px;
     }
 
-    .intro {
+    .introduction {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 35px;
     }
 
-    .intro h2 {
-      font-size: 1.8rem;
+    .introduction h2 {
+      font-size: 1.8em;
+      color: #563923;
     }
 
-    .games {
+    .jeux {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
     }
 
-    .card {
-      background: white;
+    .carte {
+      background: #fffaf1;
+      border: 2px solid #dfc9a7;
       border-radius: 14px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(56, 41, 31, 0.10);
-      border: 1px solid #eadfce;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 12px #38271918;
     }
 
-    .game-icon {
-      font-size: 3rem;
-      margin-bottom: 10px;
+    .illustration {
+      font-size: 3.5em;
+      margin: 10px 0 20px;
     }
 
-    .card h3 {
-      margin-top: 0;
-      font-size: 1.4rem;
+    .carte h3 {
+      color: #563923;
+      font-size: 1.5em;
     }
 
-    .card p {
+    .carte p {
       line-height: 1.6;
+      min-height: 50px;
     }
 
-    .button {
+    .bouton {
       display: inline-block;
-      margin-top: 10px;
-      padding: 12px 18px;
-      background: #7b342a;
+      background: #795438;
       color: white;
       text-decoration: none;
+      border: none;
       border-radius: 8px;
+      padding: 13px 20px;
+      margin-top: 12px;
+      font-size: 1em;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    .button:hover {
-      background: #59251e;
-    }
-
-    .coming-soon {
-      color: #827263;
-      font-style: italic;
-      font-size: 0.9rem;
+    .bouton:hover {
+      background: #563923;
     }
 
     footer {
-      margin-top: 30px;
+      margin-top: 45px;
       padding: 25px 15px;
-      background: #38291f;
-      color: #f8e6c7;
+      background: #3d281b;
+      color: #fff2d9;
       text-align: center;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 500px) {
       header h1 {
-        font-size: 1.6rem;
+        font-size: 1.7em;
       }
 
-      main {
-        padding: 22px 14px;
+      nav {
+        gap: 4px;
+      }
+
+      nav a {
+        padding: 9px;
       }
     }
   </style>
 </head>
 
 <body>
+
   <header>
-    <h1>Jeux de société</h1>
-    <p>En famille ou entre amis</p>
-    <p>Des moments de jeu et de partage !</p>
+    <h1>🎲 Jeux de société</h1>
+    <p>En famille ou entre amis : le plaisir de jouer ensemble !</p>
   </header>
 
   <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#tarot">Tarot à 5</a>
+    <a href="index.html">Accueil</a>
+    <a href="tarot.html">Tarot à 5</a>
     <a href="#backgammon">Backgammon</a>
     <a href="#echecs">Échecs</a>
   </nav>
 
-  <main id="accueil">
-    <section class="intro">
-      <h2>Choisissez votre jeu</h2>
+  <main>
+    <section class="introduction">
+      <h2>Bienvenue dans notre espace de jeux !</h2>
       <p>
-        Retrouvez vos proches autour de jeux passionnants,
-        pour partager de bons moments.
+        Retrouvez vos jeux préférés, partagez des moments conviviaux
+        et amusez-vous ensemble.
       </p>
     </section>
 
-    <section class="games">
-      <article class="card" id="tarot">
-        <div class="game-icon">🃏</div>
-        <h3>Le tarot à 5</h3>
+    <section class="jeux">
+
+      <article class="carte">
+        <div class="illustration">🃏</div>
+        <h3>Tarot à 5 joueurs</h3>
         <p>
-          Annonces, stratégie et suspense :
-          préparez-vous à jouer au tarot à cinq joueurs.
+          Retrouvez le plaisir du tarot à cinq et préparez-vous
+          à jouer en famille ou entre amis.
         </p>
-        <a class="button" href="#tarot">
+
+        <a class="bouton" href="tarot.html">
           Découvrir le tarot
         </a>
-        <p class="coming-soon">Premier jeu en préparation</p>
       </article>
 
-      <article class="card" id="backgammon">
-        <div class="game-icon">🎲</div>
+      <article class="carte" id="backgammon">
+        <div class="illustration">🎲</div>
         <h3>Backgammon</h3>
         <p>
-          Lancez les dés, déplacez vos pions
-          et tentez de battre votre adversaire.
+          Déplacez vos pions, lancez les dés et élaborez
+          votre stratégie pour gagner.
         </p>
-        <p class="coming-soon">Bientôt disponible</p>
+
+        <a class="bouton" href="#backgammon">
+          Découvrir le backgammon
+        </a>
       </article>
 
-      <article class="card" id="echecs">
-        <div class="game-icon">♟️</div>
+      <article class="carte" id="echecs">
+        <div class="illustration">♟️</div>
         <h3>Échecs</h3>
         <p>
-          Développez votre stratégie et
-          mettez votre adversaire échec et mat.
+          Développez votre stratégie, anticipez les coups
+          et défiez vos amis sur l'échiquier.
         </p>
-        <p class="coming-soon">Bientôt disponible</p>
+
+        <a class="bouton" href="#echecs">
+          Découvrir les échecs
+        </a>
       </article>
+
     </section>
   </main>
 
   <footer>
-    <p>Jeux de société en famille ou entre amis</p>
-    <p>© 2026 — Tous les moments de jeu sont précieux !</p>
+    <p>© Jeux de société en famille ou entre amis</p>
+    <p>Jouons ensemble !</p>
   </footer>
+
 </body>
 </html>
