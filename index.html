@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeux de société en famille ou entre amis</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5efe5;
+      color: #38291f;
+    }
+
+    header {
+      background: #38291f;
+      color: #f8e6c7;
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #fffaf2;
+      padding: 18px;
+      border-bottom: 1px solid #e4d5c3;
+    }
+
+    nav a {
+      color: #7b342a;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .intro h2 {
+      font-size: 1.8rem;
+    }
+
+    .games {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(56, 41, 31, 0.10);
+      border: 1px solid #eadfce;
+    }
+
+    .game-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.4rem;
+    }
+
+    .card p {
+      line-height: 1.6;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 18px;
+      background: #7b342a;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      background: #59251e;
+    }
+
+    .coming-soon {
+      color: #827263;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 25px 15px;
+      background: #38291f;
+      color: #f8e6c7;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.6rem;
+      }
+
+      main {
+        padding: 22px 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Jeux de société</h1>
+    <p>En famille ou entre amis</p>
+    <p>Des moments de jeu et de partage !</p>
+  </header>
+
+  <nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#tarot">Tarot à 5</a>
+    <a href="#backgammon">Backgammon</a>
+    <a href="#echecs">Échecs</a>
+  </nav>
+
+  <main id="accueil">
+    <section class="intro">
+      <h2>Choisissez votre jeu</h2>
+      <p>
+        Retrouvez vos proches autour de jeux passionnants,
+        pour partager de bons moments.
+      </p>
+    </section>
+
+    <section class="games">
+      <article class="card" id="tarot">
+        <div class="game-icon">🃏</div>
+        <h3>Le tarot à 5</h3>
+        <p>
+          Annonces, stratégie et suspense :
+          préparez-vous à jouer au tarot à cinq joueurs.
+        </p>
+        <a class="button" href="#tarot">
+          Découvrir le tarot
+        </a>
+        <p class="coming-soon">Premier jeu en préparation</p>
+      </article>
+
+      <article class="card" id="backgammon">
+        <div class="game-icon">🎲</div>
+        <h3>Backgammon</h3>
+        <p>
+          Lancez les dés, déplacez vos pions
+          et tentez de battre votre adversaire.
+        </p>
+        <p class="coming-soon">Bientôt disponible</p>
+      </article>
+
+      <article class="card" id="echecs">
+        <div class="game-icon">♟️</div>
+        <h3>Échecs</h3>
+        <p>
+          Développez votre stratégie et
+          mettez votre adversaire échec et mat.
+        </p>
+        <p class="coming-soon">Bientôt disponible</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>Jeux de société en famille ou entre amis</p>
+    <p>© 2026 — Tous les moments de jeu sont précieux !</p>
+  </footer>
+</body>
+</html>
