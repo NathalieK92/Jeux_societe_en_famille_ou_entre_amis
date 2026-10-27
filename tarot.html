@@ -1,314 +1,511 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarot à 5 joueurs</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarot à 5 joueurs — Table interactive</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #173d30;
-      color: #fff8e8;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #102b22;
+  color: #fff8e8;
+}
 
-    header {
-      text-align: center;
-      padding: 24px 12px;
-      background: #102b22;
-      border-bottom: 3px solid #d6b66b;
-    }
+header {
+  text-align: center;
+  padding: 18px 12px;
+  background: #0b211a;
+  border-bottom: 3px solid #d6b66b;
+}
 
-    header h1 {
-      margin: 0 0 8px;
-      color: #f1d58c;
-    }
+h1 {
+  margin: 0 0 8px;
+  color: #f1d58c;
+  font-size: clamp(22px, 3vw, 34px);
+}
 
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
+header p { margin: 0; }
 
-    .panneau {
-      background: #fff8e8;
-      color: #243b30;
-      padding: 20px;
-      border-radius: 14px;
-      margin-bottom: 22px;
-      text-align: center;
-    }
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 16px;
+}
 
-    .bouton {
-      background: #d6b66b;
-      color: #173d30;
-      border: none;
-      border-radius: 8px;
-      padding: 13px 20px;
-      margin: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.panneau {
+  background: #fff8e8;
+  color: #243b30;
+  padding: 15px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  text-align: center;
+}
 
-    .bouton:hover {
-      background: #f1d58c;
-    }
+.bouton {
+  background: #d6b66b;
+  color: #173d30;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .joueurs {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-    }
+.bouton:hover { background: #f1d58c; }
 
-    .joueur {
-      background: #20533f;
-      border: 2px solid #d6b66b;
-      border-radius: 12px;
-      padding: 15px;
-      min-width: 0;
-    }
+.bouton:focus-visible,
+.carte:focus-visible {
+  outline: 3px solid #ffde70;
+  outline-offset: 3px;
+}
 
-    .joueur h2 {
-      color: #f1d58c;
-      margin-top: 0;
-      font-size: 20px;
-    }
+.message {
+  font-weight: bold;
+  margin: 8px 0 0;
+  min-height: 20px;
+}
 
-    .cartes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      justify-content: center;
-    }
+.table {
+  position: relative;
+  min-height: 590px;
+  border: 12px solid #6d4528;
+  border-radius: 45% / 35%;
+  background: radial-gradient(
+    ellipse, #26704d, #164b35 75%
+  );
+  box-shadow:
+    inset 0 0 0 4px #bc9652,
+    0 10px 25px #0006;
+  margin: 15px auto;
+  max-width: 1050px;
+}
 
-    .carte {
-      width: 48px;
-      height: 72px;
-      border-radius: 5px;
-      background: #fffdf6;
-      color: #222;
-      border: 1px solid #d2c6b2;
-      box-shadow: 0 2px 4px #0003;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: bold;
-    }
+.place {
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  width: 190px;
+}
 
-    .carte .symbole {
-      font-size: 21px;
-    }
+.place .nom {
+  font-weight: bold;
+  color: #f9e5a9;
+  text-shadow: 1px 2px 3px #000;
+  margin-bottom: 6px;
+}
 
-    .rouge {
-      color: #c62828;
-    }
+.place .dos {
+  display: flex;
+  justify-content: center;
+}
 
-    .atout {
-      color: #225b40;
-    }
+.dos-carte {
+  width: 28px;
+  height: 44px;
+  border: 2px solid #fff0d5;
+  border-radius: 5px;
+  background: repeating-linear-gradient(
+    45deg,
+    #772c34 0 5px,
+    #ad6262 5px 10px
+  );
+  margin-left: -12px;
+  box-shadow: 0 2px 4px #0005;
+}
 
-    .excuse {
-      color: #6a4c93;
-    }
+.dos-carte:first-child { margin-left: 0; }
 
-    .message {
-      font-weight: bold;
-      margin-top: 12px;
-    }
+.haut { left: 50%; top: 12%; }
+.gauche-haut { left: 17%; top: 28%; }
+.droite-haut { left: 83%; top: 28%; }
+.gauche-bas { left: 18%; top: 66%; }
+.droite-bas { left: 82%; top: 66%; }
 
-    .retour {
-      display: inline-block;
-      color: #f1d58c;
-      margin: 25px 0 10px;
-    }
+.centre {
+  position: absolute;
+  left: 50%;
+  top: 49%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: #092c2099;
+  border: 1px solid #c7a965;
+  border-radius: 16px;
+  padding: 12px 18px;
+  min-width: 160px;
+}
 
-    @media (max-width: 480px) {
-      main {
-        padding: 12px;
-      }
+.centre h2 {
+  font-size: 17px;
+  margin: 0 0 10px;
+  color: #f1d58c;
+}
 
-      .carte {
-        width: 42px;
-        height: 64px;
-        font-size: 12px;
-      }
-    }
-  </style>
+.cartes-chien {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.main-joueur {
+  text-align: center;
+  margin: 18px auto 0;
+  padding: 14px 8px;
+  background: #20533f;
+  border: 2px solid #d6b66b;
+  border-radius: 14px;
+}
+
+.main-joueur h2 {
+  font-size: 20px;
+  color: #f1d58c;
+  margin: 0 0 12px;
+}
+
+.cartes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.carte {
+  width: 49px;
+  height: 72px;
+  border-radius: 6px;
+  background: #fffdf6;
+  color: #222;
+  border: 1px solid #d2c6b2;
+  box-shadow: 0 2px 4px #0003;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.carte .symbole { font-size: 22px; }
+.carte.rouge { color: #c62828; }
+.carte.atout { color: #225b40; }
+.carte.excuse { color: #6a4c93; }
+
+button.carte { cursor: pointer; }
+
+button.carte:hover {
+  transform: translateY(-5px);
+}
+
+button.carte.selectionnee {
+  transform: translateY(-12px);
+  outline: 3px solid #f1d58c;
+}
+
+.retour {
+  display: block;
+  color: #f1d58c;
+  text-align: center;
+  margin: 22px;
+}
+
+.note {
+  font-size: 13px;
+  opacity: .9;
+  text-align: center;
+}
+
+@media (max-width: 650px) {
+  .table {
+    min-height: 480px;
+    border-width: 7px;
+    border-radius: 35% / 25%;
+  }
+
+  .place { width: 110px; }
+  .place .nom { font-size: 12px; }
+
+  .dos-carte {
+    width: 17px;
+    height: 31px;
+    margin-left: -9px;
+  }
+
+  .haut { top: 12%; }
+  .gauche-haut { left: 21%; top: 30%; }
+  .droite-haut { left: 79%; top: 30%; }
+  .gauche-bas { left: 22%; top: 76%; }
+  .droite-bas { left: 78%; top: 76%; }
+
+  .centre {
+    top: 51%;
+    padding: 10px;
+    min-width: 130px;
+  }
+
+  .carte {
+    width: 42px;
+    height: 64px;
+    font-size: 12px;
+  }
+
+  .carte .symbole { font-size: 19px; }
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <h1>♠ Tarot à 5 joueurs ♠</h1>
-    <p>Préparez les cartes et distribuez la partie !</p>
-  </header>
+<header>
+  <h1>♠ Tarot à 5 joueurs ♠</h1>
+  <p>Bienvenue autour de la table !</p>
+</header>
 
-  <main>
-    <section class="panneau">
-      <h2>La distribution</h2>
-      <p>
-        Le jeu contient 78 cartes. Chaque joueur reçoit
-        15 cartes et 3 cartes sont mises de côté au chien.
-      </p>
-      <button class="bouton" onclick="distribuer()">
-        Mélanger et distribuer
-      </button>
-      <button class="bouton" onclick="reinitialiser()">
-        Nouvelle partie
-      </button>
-      <div id="message" class="message">
-        Clique sur « Mélanger et distribuer » pour commencer.
+<main>
+  <section class="panneau">
+    <button class="bouton" id="distribuer">
+      🃏 Mélanger et distribuer
+    </button>
+
+    <button class="bouton" id="reinitialiser">
+      ↻ Nouvelle partie
+    </button>
+
+    <div id="message" class="message" role="status">
+      Clique sur « Mélanger et distribuer »
+      pour commencer.
+    </div>
+  </section>
+
+  <section class="table"
+           aria-label="Table de tarot à cinq joueurs">
+
+    <div class="place haut" id="place2">
+      <div class="nom">Joueur 3</div>
+      <div class="dos"></div>
+    </div>
+
+    <div class="place gauche-haut" id="place1">
+      <div class="nom">Joueur 2</div>
+      <div class="dos"></div>
+    </div>
+
+    <div class="place droite-haut" id="place3">
+      <div class="nom">Joueur 4</div>
+      <div class="dos"></div>
+    </div>
+
+    <div class="place gauche-bas" id="place0">
+      <div class="nom">Joueur 1</div>
+      <div class="dos"></div>
+    </div>
+
+    <div class="place droite-bas" id="place4">
+      <div class="nom">Joueur 5</div>
+      <div class="dos"></div>
+    </div>
+
+    <div class="centre">
+      <h2>🐶 Le chien (3 cartes)</h2>
+      <div id="cartesChien" class="cartes-chien">
+        <span>En attente</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="joueurs" class="joueurs"></section>
+  <section class="main-joueur">
+    <h2>Votre main — Joueur 1</h2>
 
-    <section class="panneau" id="chien" hidden>
-      <h2>Le chien — 3 cartes</h2>
-      <div id="cartesChien" class="cartes"></div>
-    </section>
+    <div id="maMain" class="cartes">
+      <span>Vos cartes apparaîtront ici.</span>
+    </div>
 
-    <p style="text-align:center">
-      <a class="retour" href="index.html">← Retour au menu principal</a>
+    <p class="note">
+      Cliquez sur une carte pour la sélectionner.
+      Les autres joueurs gardent leurs cartes cachées.
     </p>
-  </main>
+  </section>
 
-  <script>
-    function creerJeu() {
-      const jeu = [];
-      const couleurs = [
-        { nom: "Cœur", symbole: "♥", rouge: true },
-        { nom: "Carreau", symbole: "♦", rouge: true },
-        { nom: "Trèfle", symbole: "♣", rouge: false },
-        { nom: "Pique", symbole: "♠", rouge: false }
-      ];
+  <a class="retour" href="index.html">
+    ← Retour au menu principal
+  </a>
+</main>
 
-      const figures = [
-        "Roi", "Dame", "Cavalier", "Valet",
-        "10", "9", "8", "7", "6", "5", "4", "3", "2", "1"
-      ];
+<script>
+function creerJeu() {
+  const jeu = [];
 
-      couleurs.forEach(couleur => {
-        figures.forEach(valeur => {
-          jeu.push({
-            nom: valeur + " de " + couleur.nom,
-            valeur: valeur,
-            symbole: couleur.symbole,
-            classe: couleur.rouge ? "rouge" : ""
-          });
-        });
-      });
+  const couleurs = [
+    { nom: "Cœur", symbole: "♥", rouge: true },
+    { nom: "Carreau", symbole: "♦", rouge: true },
+    { nom: "Trèfle", symbole: "♣", rouge: false },
+    { nom: "Pique", symbole: "♠", rouge: false }
+  ];
 
-      for (let i = 1; i <= 21; i++) {
-        jeu.push({
-          nom: "Atout " + i,
-          valeur: i === 1 ? "Petit" : String(i),
-          symbole: "★",
-          classe: "atout"
-        });
-      }
+  const figures = [
+    "Roi", "Dame", "Cavalier", "Valet",
+    "10", "9", "8", "7", "6", "5",
+    "4", "3", "2", "1"
+  ];
 
+  couleurs.forEach(couleur => {
+    figures.forEach(valeur => {
       jeu.push({
-        nom: "L'Excuse",
-        valeur: "Excuse",
-        symbole: "★",
-        classe: "excuse"
+        nom: valeur + " de " + couleur.nom,
+        valeur: valeur,
+        symbole: couleur.symbole,
+        classe: couleur.rouge ? "rouge" : ""
+      });
+    });
+  });
+
+  for (let i = 1; i <= 21; i++) {
+    jeu.push({
+      nom: "Atout " + i,
+      valeur: i === 1 ? "Petit" : String(i),
+      symbole: "★",
+      classe: "atout"
+    });
+  }
+
+  jeu.push({
+    nom: "L'Excuse",
+    valeur: "Excuse",
+    symbole: "★",
+    classe: "excuse"
+  });
+
+  return jeu;
+}
+
+function melanger(cartes) {
+  for (let i = cartes.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [cartes[i], cartes[j]] = [cartes[j], cartes[i]];
+  }
+
+  return cartes;
+}
+
+function afficherCarte(carte, selectionnable = false) {
+  const element = document.createElement(
+    selectionnable ? "button" : "div"
+  );
+
+  element.className = "carte " + carte.classe;
+  element.title = carte.nom;
+
+  if (selectionnable) {
+    element.type = "button";
+    element.setAttribute("aria-label", carte.nom);
+    element.setAttribute("aria-pressed", "false");
+
+    element.addEventListener("click", () => {
+      document.querySelectorAll(
+        "#maMain .selectionnee"
+      ).forEach(e => {
+        e.classList.remove("selectionnee");
+        e.setAttribute("aria-pressed", "false");
       });
 
-      return jeu;
-    }
+      element.classList.add("selectionnee");
+      element.setAttribute("aria-pressed", "true");
 
-    function melanger(cartes) {
-      for (let i = cartes.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cartes[i], cartes[j]] = [cartes[j], cartes[i]];
-      }
-      return cartes;
-    }
-
-    function afficherCarte(carte) {
-      const element = document.createElement("div");
-      element.className = "carte " + carte.classe;
-      element.title = carte.nom;
-
-      const valeur = document.createElement("span");
-      valeur.textContent = carte.valeur;
-
-      const symbole = document.createElement("span");
-      symbole.className = "symbole";
-      symbole.textContent = carte.symbole;
-
-      element.appendChild(valeur);
-      element.appendChild(symbole);
-
-      return element;
-    }
-
-    function distribuer() {
-      const jeu = melanger(creerJeu());
-      const noms = [
-        "Joueur 1",
-        "Joueur 2",
-        "Joueur 3",
-        "Joueur 4",
-        "Joueur 5"
-      ];
-
-      const mains = [[], [], [], [], []];
-
-      for (let i = 0; i < 75; i++) {
-        mains[i % 5].push(jeu[i]);
-      }
-
-      const chien = jeu.slice(75, 78);
-      const zoneJoueurs = document.getElementById("joueurs");
-      zoneJoueurs.replaceChildren();
-
-      noms.forEach((nom, index) => {
-        const bloc = document.createElement("article");
-        bloc.className = "joueur";
-
-        const titre = document.createElement("h2");
-        titre.textContent = nom + " — " + mains[index].length + " cartes";
-        bloc.appendChild(titre);
-
-        const zoneCartes = document.createElement("div");
-        zoneCartes.className = "cartes";
-
-        mains[index].forEach(carte => {
-          zoneCartes.appendChild(afficherCarte(carte));
-        });
-
-        bloc.appendChild(zoneCartes);
-        zoneJoueurs.appendChild(bloc);
-      });
-
-      const zoneChien = document.getElementById("cartesChien");
-      zoneChien.replaceChildren();
-
-      chien.forEach(carte => {
-        zoneChien.appendChild(afficherCarte(carte));
-      });
-
-      document.getElementById("chien").hidden = false;
       document.getElementById("message").textContent =
-        "Distribution terminée : 5 mains de 15 cartes et un chien de 3 cartes.";
-    }
+        "Carte sélectionnée : " + carte.nom +
+        ". (Le jeu des plis sera ajouté ensuite.)";
+    });
+  }
 
-    function reinitialiser() {
-      document.getElementById("joueurs").replaceChildren();
-      document.getElementById("cartesChien").replaceChildren();
-      document.getElementById("chien").hidden = true;
-      document.getElementById("message").textContent =
-        "Clique sur « Mélanger et distribuer » pour commencer.";
+  const valeur = document.createElement("span");
+  valeur.textContent = carte.valeur;
+
+  const symbole = document.createElement("span");
+  symbole.className = "symbole";
+  symbole.textContent = carte.symbole;
+
+  element.append(valeur, symbole);
+
+  return element;
+}
+
+function distribuer() {
+  const jeu = melanger(creerJeu());
+  const mains = [[], [], [], [], []];
+
+  for (let i = 0; i < 75; i++) {
+    mains[i % 5].push(jeu[i]);
+  }
+
+  const chien = jeu.slice(75);
+
+  const zone = document.getElementById("maMain");
+  zone.replaceChildren();
+
+  mains[0].forEach(carte => {
+    zone.appendChild(afficherCarte(carte, true));
+  });
+
+  for (let i = 0; i < 5; i++) {
+    const dos = document.querySelector(
+      "#place" + i + " .dos"
+    );
+
+    dos.replaceChildren();
+
+    if (i !== 0) {
+      for (let n = 0; n < 15; n++) {
+        const element = document.createElement("span");
+        element.className = "dos-carte";
+        dos.appendChild(element);
+      }
+    } else {
+      dos.textContent = "Vous";
     }
-  </script>
+  }
+
+  const zoneChien = document.getElementById(
+    "cartesChien"
+  );
+
+  zoneChien.replaceChildren();
+
+  chien.forEach(carte => {
+    zoneChien.appendChild(afficherCarte(carte));
+  });
+
+  document.getElementById("message").textContent =
+    "Distribution terminée : 5 joueurs × 15 cartes, " +
+    "et 3 cartes au chien.";
+}
+
+function reinitialiser() {
+  document.getElementById("maMain").textContent =
+    "Vos cartes apparaîtront ici.";
+
+  document.getElementById("cartesChien").textContent =
+    "En attente";
+
+  for (let i = 0; i < 5; i++) {
+    document.querySelector(
+      "#place" + i + " .dos"
+    ).replaceChildren();
+  }
+
+  document.getElementById("message").textContent =
+    "Clique sur « Mélanger et distribuer » " +
+    "pour commencer.";
+}
+
+document.getElementById("distribuer")
+  .addEventListener("click", distribuer);
+
+document.getElementById("reinitialiser")
+  .addEventListener("click", reinitialiser);
+</script>
 </body>
 </html>
