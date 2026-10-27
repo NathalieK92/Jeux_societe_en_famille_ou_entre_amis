@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Jeux de société en famille ou entre amis</title>
 
   <style>
@@ -64,9 +66,14 @@
       color: #563923;
     }
 
+    .introduction p {
+      line-height: 1.7;
+    }
+
     .jeux {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
       gap: 25px;
     }
 
@@ -111,6 +118,17 @@
       background: #563923;
     }
 
+    .version {
+      display: inline-block;
+      background: #e7f2e8;
+      color: #24613a;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
     footer {
       margin-top: 45px;
       padding: 25px 15px;
@@ -128,70 +146,131 @@
 </head>
 
 <body>
+
   <header>
     <h1>🎲 Jeux de société</h1>
-    <p>En famille ou entre amis : le plaisir de jouer ensemble !</p>
+    <p>
+      En famille ou entre amis :
+      le plaisir de jouer ensemble !
+    </p>
   </header>
 
   <nav>
     <a href="index.html">Accueil</a>
-    <a href="tarot.html">Tarot à 5</a>
+    <a href="tarot.html?v=2">Tarot à 5</a>
     <a href="#backgammon">Backgammon</a>
     <a href="#echecs">Échecs</a>
   </nav>
 
   <main>
+
     <section class="introduction">
       <h2>Bienvenue dans notre espace de jeux !</h2>
+
       <p>
-        Retrouvez vos jeux préférés et partagez des moments
-        conviviaux en famille ou entre amis.
+        Retrouvez vos jeux préférés et partagez
+        des moments conviviaux en famille
+        ou entre amis.
+      </p>
+
+      <p>
+        Découvrez progressivement nos jeux,
+        nos entraînements et nos futures
+        parties en ligne.
       </p>
     </section>
 
     <section class="jeux">
+
+      <!-- TAROT -->
+
       <article class="carte">
+
         <div class="illustration">🃏</div>
+
+        <span class="version">
+          Version 2 interactive
+        </span>
+
         <h3>Tarot à 5 joueurs</h3>
+
         <p>
-          Découvrez le tarot et préparez-vous à jouer
-          en famille ou entre amis.
+          Installez-vous autour de notre table
+          de tarot virtuelle !
         </p>
-        <a class="bouton"
-           href="/Jeux_societe_en_famille_ou_entre_amis/tarot.html">
-          Découvrir le tarot
+
+        <p>
+          Mélangez les 78 cartes, découvrez
+          votre main et commencez à jouer
+          sur le tapis vert.
+        </p>
+
+        <a class="bouton" href="tarot.html?v=2">
+          Jouer au tarot
         </a>
+
       </article>
+
+      <!-- BACKGAMMON -->
 
       <article class="carte" id="backgammon">
+
         <div class="illustration">🎲</div>
+
         <h3>Backgammon</h3>
+
         <p>
-          Lancez les dés, déplacez vos pions et élaborez
-          votre stratégie pour gagner.
+          Lancez les dés, déplacez vos pions
+          et élaborez votre stratégie
+          pour gagner.
         </p>
-        <a class="bouton" href="#backgammon">
-          Découvrir le backgammon
-        </a>
+
+        <p>
+          Ce jeu sera bientôt disponible.
+        </p>
+
+        <span class="version">
+          À venir
+        </span>
+
       </article>
 
+      <!-- ECHECS -->
+
       <article class="carte" id="echecs">
+
         <div class="illustration">♟️</div>
+
         <h3>Échecs</h3>
+
         <p>
-          Anticipez les coups et développez votre stratégie
+          Anticipez les coups, développez
+          votre stratégie et progressez
           sur l'échiquier.
         </p>
-        <a class="bouton" href="#echecs">
-          Découvrir les échecs
-        </a>
+
+        <p>
+          Des parties et des exercices
+          d'entraînement seront proposés.
+        </p>
+
+        <span class="version">
+          À venir
+        </span>
+
       </article>
+
     </section>
+
   </main>
 
   <footer>
-    <p>Jeux de société en famille ou entre amis</p>
-    <p>Jouons ensemble !</p>
+    <p>
+      Jeux de société en famille ou entre amis
+    </p>
+
+    <p>❤️ Jouons ensemble !</p>
   </footer>
+
 </body>
 </html>
