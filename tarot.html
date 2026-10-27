@@ -1,415 +1,801 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tarot interactif — Version 2</title>
+<title>Tarot interactif — Version 3</title>
 <style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #102a21;
-  color: #fff8e8;
-}
-header {
-  background: #081d16;
-  padding: 18px;
-  text-align: center;
-  border-bottom: 3px solid #d7b76e;
-}
-h1 { color: #f1d58c; margin: 0 0 8px; }
-main { max-width: 1100px; margin: auto; padding: 15px; }
-.commandes {
-  text-align: center;
-  background: #fff8e8;
-  color: #173d30;
-  padding: 15px;
-  border-radius: 12px;
-}
-button {
-  cursor: pointer;
-  font-family: inherit;
-}
-.action {
-  background: #e4c275;
-  color: #183628;
-  border: 0;
-  padding: 12px 18px;
-  border-radius: 8px;
-  margin: 5px;
-  font-size: 16px;
-  font-weight: bold;
-}
-.action:disabled { opacity: .45; cursor: default; }
-.table {
-  position: relative;
-  margin: 20px auto;
-  height: 510px;
-  border: 12px solid #76502c;
-  border-radius: 45% / 35%;
-  background: radial-gradient(ellipse, #287b50, #12452e);
-  box-shadow: inset 0 0 0 4px #c69d57, 0 8px 25px #0006;
-}
-.joueur {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 125px;
-  font-size: 14px;
-  font-weight: bold;
-}
-.joueur span {
-  display: block;
-  margin-top: 5px;
-  font-size: 12px;
-}
-.j1 { left: 17%; top: 30%; }
-.j2 { left: 50%; top: 12%; }
-.j3 { left: 83%; top: 30%; }
-.j4 { left: 83%; top: 77%; }
-.j0 { left: 17%; top: 77%; }
-.dos {
-  display: inline-block;
-  width: 29px;
-  height: 43px;
-  margin: 6px -8px 0 0;
-  background: repeating-linear-gradient(
-    45deg, #7c293b 0 5px, #b36b75 5px 10px
-  );
-  border: 2px solid white;
-  border-radius: 4px;
-}
-.centre {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  width: 60%;
-}
-.pli {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  flex-wrap: wrap;
-  min-height: 85px;
-}
-.carte {
-  background: #fffdf5;
-  color: #222;
-  border: 1px solid #bcb4a6;
-  border-radius: 6px;
-  width: 48px;
-  height: 72px;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 2px 4px #0004;
-}
-.carte .symbole { font-size: 22px; }
-.rouge { color: #c62828; }
-.atout { color: #17613b; }
-.excuse { color: #77449b; }
-.main {
-  text-align: center;
-  padding: 16px;
-  background: #20513c;
-  border: 2px solid #d6b66b;
-  border-radius: 14px;
-}
-.main h2 { color: #f1d58c; }
-.cartes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 5px;
-  padding: 12px 0;
-}
-button.carte:hover { transform: translateY(-5px); }
-button.carte.choisie {
-  transform: translateY(-12px);
-  outline: 3px solid #f8d36d;
-}
-#message { font-weight: bold; }
-.retour {
-  display: block;
-  text-align: center;
-  color: #f1d58c;
-  margin: 25px;
-}
-@media(max-width:600px) {
-  .table {
-    height: 430px;
-    border-width: 7px;
-    border-radius: 35% / 25%;
-  }
-  .joueur { width: 90px; font-size: 12px; }
-  .j1 { left: 21%; }
-  .j3 { left: 79%; }
-  .j0 { left: 22%; }
-  .j4 { left: 78%; }
-  .dos { width: 20px; height: 32px; }
-  .carte { width: 40px; height: 61px; font-size: 12px; }
-  .carte .symbole { font-size: 18px; }
-  .centre { width: 72%; }
+*{box-sizing:border-box}
+body{margin:0;background:#10291f;color:#fff7e6;font:16px Arial,sans-serif}
+header{text-align:center;background:#071a13;padding:20px;border-bottom:3px solid #d8b76b}
+h1{color:#f4d991;margin:0 0 8px}
+main{max-width:1100px;margin:auto;padding:15px}
+.panel{background:#fff9eb;color:#243a2b;border-radius:13px;padding:15px;text-align:center;margin-bottom:14px}
+button{font:inherit;cursor:pointer}
+.action{background:#e4c47c;color:#203b2b;border:0;border-radius:8px;padding:11px 15px;margin:4px;font-weight:bold}
+.action:disabled{opacity:.4;cursor:not-allowed}
+.table{height:460px;position:relative;background:radial-gradient(ellipse,#2c8055,#12452f);border:11px solid #76502d;border-radius:43% / 33%;box-shadow:inset 0 0 0 4px #bd9654,0 9px 22px #0006;margin:15px auto}
+.seat{position:absolute;transform:translate(-50%,-50%);width:135px;text-align:center;font-size:14px;font-weight:bold}
+.seat small{display:block;font-weight:normal}
+.s0{left:19%;top:78%}
+.s1{left:16%;top:30%}
+.s2{left:50%;top:11%}
+.s3{left:84%;top:30%}
+.s4{left:81%;top:78%}
+.backs{display:flex;justify-content:center;margin-top:5px}
+.back{width:26px;height:40px;margin-left:-11px;border:2px solid #fff;border-radius:4px;background:repeating-linear-gradient(45deg,#7e3144 0 5px,#b96775 5px 10px)}
+.back:first-child{margin-left:0}
+.middle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64%;text-align:center}
+.middle h2{font-size:17px;color:#ffe2a0;margin:4px}
+.trick{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;min-height:84px;align-items:center}
+.played{font-size:11px;text-align:center}
+.hand{background:#20513b;border:2px solid #d8b76b;border-radius:14px;text-align:center;padding:16px}
+.hand h2{margin:0 0 14px;color:#f1d58c}
+.cards{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.card{width:48px;height:72px;background:#fffdf5;color:#222;border:1px solid #c6bdac;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:bold;box-shadow:0 2px 4px #0004}
+.card b{font-size:22px}
+.card.red{color:#c52828}
+.card.trump{color:#186341}
+.card.fool{color:#74459a}
+button.card:hover:not(:disabled){transform:translateY(-5px)}
+button.card.selected{outline:3px solid #ffd86b;transform:translateY(-10px)}
+button.card:disabled{opacity:.45;cursor:not-allowed}
+.controls{margin-top:12px}
+.hidden{display:none!important}
+.notice{font-weight:bold;min-height:22px}
+.muted{font-size:13px;opacity:.85}
+.choices{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.choice{padding:9px 12px;border-radius:7px;border:2px solid #caa96d;background:#fffdf5;color:#253a2b}
+.choice.active{background:#e9c77c}
+.log{max-height:145px;overflow:auto;text-align:left;font-size:13px;background:#eee6d4;border-radius:8px;padding:9px;margin-top:12px}
+.log p{margin:5px 0}
+.return{display:block;color:#f1d58c;text-align:center;margin:25px}
+button:focus-visible{outline:3px solid #ffdc6c;outline-offset:3px}
+@media(max-width:600px){
+.table{height:410px;border-width:7px;border-radius:34% / 25%}
+.seat{width:90px;font-size:12px}
+.s0{left:21%}
+.s1{left:21%}
+.s3{left:79%}
+.s4{left:79%}
+.back{width:18px;height:30px;margin-left:-9px}
+.middle{width:74%}
+.card{width:40px;height:62px;font-size:11px}
+.card b{font-size:18px}
 }
 </style>
 </head>
 <body>
 <header>
-  <h1>🃏 TAROT INTERACTIF — VERSION 2</h1>
-  <p>Votre nouvelle table de tarot à cinq joueurs</p>
+<h1>🃏 TAROT INTERACTIF — VERSION 3</h1>
+<p>Une partie à cinq contre quatre ordinateurs</p>
 </header>
 <main>
-  <section class="commandes">
-    <button class="action" onclick="distribuer()">
-      Mélanger et distribuer
-    </button>
-    <button class="action" onclick="reinitialiser()">
-      Nouvelle partie
-    </button>
-    <p id="message" role="status">
-      Cliquez sur Mélanger et distribuer.
-    </p>
-  </section>
-
-  <section class="table">
-    <div class="joueur j1">
-      Joueur 2 <span id="dos1"></span>
-    </div>
-    <div class="joueur j2">
-      Joueur 3 <span id="dos2"></span>
-    </div>
-    <div class="joueur j3">
-      Joueur 4 <span id="dos3"></span>
-    </div>
-    <div class="joueur j4">
-      Joueur 5 <span id="dos4"></span>
-    </div>
-    <div class="joueur j0">
-      Joueur 1 <span>Vous</span>
-    </div>
-    <div class="centre">
-      <h3>♠ Le tapis de jeu ♠</h3>
-      <div id="pli" class="pli"></div>
-      <p id="chien">Chien : 3 cartes cachées</p>
-    </div>
-  </section>
-
-  <section class="main">
-    <h2>Vos 15 cartes — Joueur 1</h2>
-    <div id="mainCartes" class="cartes">
-      Distribuez pour voir votre main.
-    </div>
-    <button class="action" id="jouer"
-      onclick="jouerCarte()" disabled>
-      Jouer cette carte
-    </button>
-    <button class="action" id="pliSuivant"
-      onclick="viderPli()" disabled>
-      Pli suivant
-    </button>
-    <p>Cliquez sur une carte, puis sur
-      « Jouer cette carte ».</p>
-  </section>
-
-  <a href="index.html" class="retour">
-    ← Retour au menu principal
-  </a>
+<section class="panel">
+<button class="action" id="new">🃏 Distribuer une nouvelle donne</button>
+<p class="notice" id="status" role="status">Clique sur « Distribuer une nouvelle donne ».</p>
+<div id="bids" class="choices hidden">
+<button class="action" data-bid="0">Passe</button>
+<button class="action" data-bid="1">Prise</button>
+<button class="action" data-bid="2">Garde</button>
+<button class="action" data-bid="3">Garde sans</button>
+<button class="action" data-bid="4">Garde contre</button>
+</div>
+<div id="kings" class="choices hidden"></div>
+<div id="dogControls" class="hidden">
+<p id="dogText"></p>
+<div class="cards" id="dogCards"></div>
+<button class="action" id="dogDone">Valider l'écart</button>
+</div>
+<div id="result"></div>
+<div class="log" id="log" aria-label="Historique de la partie"></div>
+</section>
+<section class="table" aria-label="Table de tarot">
+<div class="seat s0" id="seat0">Vous<small id="info0"></small><div class="backs" id="back0"></div></div>
+<div class="seat s1" id="seat1">Ordinateur 2<small id="info1"></small><div class="backs" id="back1"></div></div>
+<div class="seat s2" id="seat2">Ordinateur 3<small id="info2"></small><div class="backs" id="back2"></div></div>
+<div class="seat s3" id="seat3">Ordinateur 4<small id="info3"></small><div class="backs" id="back3"></div></div>
+<div class="seat s4" id="seat4">Ordinateur 5<small id="info4"></small><div class="backs" id="back4"></div></div>
+<div class="middle">
+<h2 id="centerTitle">♠ Tapis de jeu ♠</h2>
+<div id="trick" class="trick"></div>
+<p class="muted" id="centerInfo">Le chien contient trois cartes.</p>
+</div>
+</section>
+<section class="hand">
+<h2 id="handTitle">Votre main — 15 cartes</h2>
+<div id="hand" class="cards">Distribuez pour commencer.</div>
+<div class="controls">
+<button class="action" id="play" disabled>Jouer la carte sélectionnée</button>
+<button class="action hidden" id="next">Pli suivant</button>
+</div>
+<p class="muted" id="help">Les cartes grisées ne sont pas autorisées par les règles.</p>
+</section>
+<a class="return" href="index.html">← Retour au menu principal</a>
 </main>
-
 <script>
-let mains = [];
-let chien = [];
-let selection = -1;
-let cartesPosees = [];
-let pliTermine = false;
+'use strict';
 
-function creerJeu() {
-  const jeu = [];
-  const couleurs = [
-    ["Cœur", "♥", "rouge"],
-    ["Carreau", "♦", "rouge"],
-    ["Trèfle", "♣", ""],
-    ["Pique", "♠", ""]
-  ];
-  const valeurs = [
-    "Roi", "Dame", "Cavalier", "Valet",
-    "10", "9", "8", "7", "6", "5",
-    "4", "3", "2", "1"
-  ];
-  couleurs.forEach(([nom, symbole, classe]) => {
-    valeurs.forEach(valeur => {
-      jeu.push({
-        nom: valeur + " de " + nom,
-        valeur, symbole, classe
+const $ = id => document.getElementById(id);
+
+const SUITS = [
+  ['Cœur', '♥', 'red'],
+  ['Carreau', '♦', 'red'],
+  ['Trèfle', '♣', ''],
+  ['Pique', '♠', '']
+];
+
+const RANKS = [
+  '1','2','3','4','5','6','7',
+  '8','9','10','Valet','Cavalier','Dame','Roi'
+];
+
+let hands = [], dog = [], trick = [];
+let won = [[],[],[],[],[]];
+let phase = 'idle', bidIndex = 0, bestBid = 0;
+let taker = -1, partner = -1, called = '';
+let leader = 0, turn = 0, selected = null;
+let discard = [], trickNumber = 0, contract = 0;
+let excuseOwners = [];
+
+const labels = [
+  'Passe', 'Prise', 'Garde',
+  'Garde sans', 'Garde contre'
+];
+
+function name(i) {
+  return i === 0 ? 'Vous' : 'Ordinateur ' + (i + 1);
+}
+
+function say(t) {
+  $('status').textContent = t;
+}
+
+function log(t) {
+  let p = document.createElement('p');
+  p.textContent = t;
+  $('log').prepend(p);
+}
+
+function deck() {
+  let a = [];
+  for (let [suit, symbol, cls] of SUITS) {
+    for (let r = 0; r < 14; r++) {
+      a.push({
+        id: suit + r,
+        suit,
+        rank: r + 1,
+        label: RANKS[r] + ' de ' + suit,
+        short: RANKS[r],
+        symbol,
+        cls
       });
-    });
-  });
-  for (let i = 1; i <= 21; i++) {
-    jeu.push({
-      nom: "Atout " + i,
-      valeur: i === 1 ? "Petit" : String(i),
-      symbole: "★",
-      classe: "atout"
+    }
+  }
+
+  for (let n = 1; n <= 21; n++) {
+    a.push({
+      id: 'T' + n,
+      suit: 'Atout',
+      rank: n,
+      label: 'Atout ' + n,
+      short: n === 1 ? 'Petit' : String(n),
+      symbol: '★',
+      cls: 'trump'
     });
   }
-  jeu.push({
-    nom: "L'Excuse",
-    valeur: "Excuse",
-    symbole: "★",
-    classe: "excuse"
+
+  a.push({
+    id: 'E',
+    suit: 'Excuse',
+    rank: 0,
+    label: "L'Excuse",
+    short: 'Excuse',
+    symbol: '★',
+    cls: 'fool'
   });
-  return jeu;
+
+  return a;
 }
 
-function melanger(jeu) {
-  for (let i = jeu.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [jeu[i], jeu[j]] = [jeu[j], jeu[i]];
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return jeu;
+  return a;
 }
 
-function elementCarte(carte, bouton = false) {
-  const e = document.createElement(
-    bouton ? "button" : "div"
-  );
-  e.className = "carte " + carte.classe;
-  e.title = carte.nom;
-  if (bouton) {
-    e.type = "button";
-    e.setAttribute("aria-label", carte.nom);
+function strength(h) {
+  return h.reduce((n,c) =>
+    n + (c.suit === 'Atout'
+      ? (c.rank >= 16 ? 3 : 1)
+      : c.rank === 14 ? 3
+      : c.rank >= 12 ? 1 : 0), 0);
+}
+
+function card(c, click, disabled = false) {
+  let e = document.createElement(click ? 'button' : 'div');
+  e.className = 'card ' + c.cls;
+
+  if (click) {
+    e.type = 'button';
+    e.disabled = disabled;
+    e.setAttribute('aria-label', c.label);
+    e.onclick = () => click(c);
   }
-  const valeur = document.createElement("span");
-  valeur.textContent = carte.valeur;
-  const symbole = document.createElement("span");
-  symbole.className = "symbole";
-  symbole.textContent = carte.symbole;
-  e.append(valeur, symbole);
+
+  let v = document.createElement('span');
+  v.textContent = c.short;
+
+  let s = document.createElement('b');
+  s.textContent = c.symbol;
+
+  e.append(v,s);
+  e.title = c.label;
   return e;
 }
 
-function afficherMain() {
-  const zone = document.getElementById("mainCartes");
-  zone.replaceChildren();
-  mains[0].forEach((carte, i) => {
-    const e = elementCarte(carte, true);
-    if (i === selection) e.classList.add("choisie");
-    e.setAttribute("aria-pressed", i === selection);
-    e.onclick = () => {
-      if (pliTermine) return;
-      selection = i;
-      afficherMain();
-      document.getElementById("jouer").disabled = false;
-      message("Carte sélectionnée : " + carte.nom);
-    };
-    zone.appendChild(e);
-  });
-  if (!mains[0].length) {
-    zone.textContent = "Vous n'avez plus de cartes.";
+function clearPanels() {
+  for (let id of ['bids','kings','dogControls']) {
+    $(id).classList.add('hidden');
   }
+  $('result').textContent = '';
+  $('next').classList.add('hidden');
+  $('play').disabled = true;
 }
 
-function message(texte) {
-  document.getElementById("message").textContent = texte;
-}
+function start() {
+  let a = shuffle(deck());
+  hands = [[],[],[],[],[]];
+  won = [[],[],[],[],[]];
 
-function afficherDos() {
-  for (let i = 1; i < 5; i++) {
-    const zone = document.getElementById("dos" + i);
-    zone.replaceChildren();
-    if (mains[i].length) {
-      for (let n = 0; n < 3; n++) {
-        const dos = document.createElement("span");
-        dos.className = "dos";
-        zone.appendChild(dos);
-      }
-      const compteur = document.createElement("span");
-      compteur.textContent = mains[i].length + " cartes";
-      zone.appendChild(compteur);
-    }
-  }
-}
-
-function distribuer() {
-  const jeu = melanger(creerJeu());
-  mains = [[], [], [], [], []];
   for (let i = 0; i < 75; i++) {
-    mains[i % 5].push(jeu[i]);
+    hands[i % 5].push(a[i]);
   }
-  chien = jeu.slice(75);
-  selection = -1;
-  cartesPosees = [];
-  pliTermine = false;
-  document.getElementById("pli").replaceChildren();
-  document.getElementById("jouer").disabled = true;
-  document.getElementById("pliSuivant").disabled = true;
-  afficherMain();
-  afficherDos();
-  message("78 cartes distribuées. Sélectionnez une carte !");
+
+  dog = a.slice(75);
+  trick = [];
+  discard = [];
+  excuseOwners = [];
+  selected = null;
+  phase = 'bid';
+  bidIndex = 0;
+  bestBid = 0;
+  taker = -1;
+  partner = -1;
+  called = '';
+  leader = 0;
+  turn = 0;
+  contract = 0;
+  trickNumber = 0;
+
+  $('log').replaceChildren();
+  clearPanels();
+  $('trick').replaceChildren();
+  $('centerTitle').textContent = '♠ Enchères ♠';
+  $('centerInfo').textContent = 'Chien : 3 cartes cachées';
+
+  log('Nouvelle donne : 15 cartes par joueur, 3 au chien.');
+  render();
+  advanceBids();
 }
 
-function jouerCarte() {
-  if (selection < 0 || pliTermine || !mains.length) return;
-  const carte = mains[0].splice(selection, 1)[0];
-  cartesPosees.push(carte);
-  selection = -1;
-  const pli = document.getElementById("pli");
-  pli.appendChild(elementCarte(carte));
-  afficherMain();
-  document.getElementById("jouer").disabled = true;
+function advanceBids() {
+  if (phase !== 'bid') return;
 
-  // Démonstration : chaque adversaire pose
-  // une carte aléatoire, sans analyse des règles.
-  for (let i = 1; i < 5; i++) {
-    if (mains[i].length) {
-      const index = Math.floor(
-        Math.random() * mains[i].length
-      );
-      const autre = mains[i].splice(index, 1)[0];
-      cartesPosees.push(autre);
-      pli.appendChild(elementCarte(autre));
+  if (bidIndex === 5) {
+    if (taker < 0) {
+      phase = 'idle';
+      say('Tout le monde a passé. Redistribue !');
+      return;
+    }
+
+    contract = bestBid;
+    log(name(taker) + ' remporte les enchères : ' +
+        labels[contract] + '.');
+    chooseKing();
+    return;
+  }
+
+  let i = bidIndex;
+
+  if (i === 0) {
+    $('bids').classList.remove('hidden');
+    for (let b of document.querySelectorAll('[data-bid]')) {
+      b.disabled = Number(b.dataset.bid) !== 0 &&
+        Number(b.dataset.bid) <= bestBid;
+    }
+    say('À vous de parler : choisissez une enchère.');
+  } else {
+    let power = strength(hands[i]);
+    let offer = power >= 26 ? 3 :
+                power >= 20 ? 2 :
+                power >= 15 ? 1 : 0;
+
+    if (offer <= bestBid) offer = 0;
+
+    log(name(i) + ' : ' + labels[offer]);
+
+    if (offer) {
+      bestBid = offer;
+      taker = i;
+    }
+
+    bidIndex++;
+    advanceBids();
+  }
+}
+
+function humanBid(b) {
+  if (phase !== 'bid' || bidIndex !== 0 ||
+      (b && b <= bestBid)) return;
+
+  $('bids').classList.add('hidden');
+  log('Vous : ' + labels[b]);
+
+  if (b) {
+    bestBid = b;
+    taker = 0;
+  }
+
+  bidIndex++;
+  advanceBids();
+}
+
+function chooseKing() {
+  phase = 'king';
+  $('centerTitle').textContent = '♛ Appel du roi ♛';
+
+  let suits = SUITS.map(s => s[0]);
+  let kings = hands[taker]
+    .filter(c => c.rank === 14 && suits.includes(c.suit))
+    .map(c => c.suit);
+
+  let options = suits.filter(s => !kings.includes(s));
+  let rank = 14;
+
+  if (!options.length) {
+    let queens = hands[taker]
+      .filter(c => c.rank === 13 && suits.includes(c.suit))
+      .map(c => c.suit);
+    options = suits.filter(s => !queens.includes(s));
+    rank = 13;
+  }
+
+  if (taker === 0) {
+    $('kings').replaceChildren();
+
+    for (let suit of options) {
+      let b = document.createElement('button');
+      b.className = 'choice';
+      b.textContent =
+        (rank === 14 ? 'Roi' : 'Dame') + ' de ' + suit;
+      b.onclick = () => setKing(suit,rank);
+      $('kings').append(b);
+    }
+
+    $('kings').classList.remove('hidden');
+    say('Vous avez remporté les enchères. Appelez une carte.');
+  } else {
+    let suit = options[Math.floor(Math.random()*options.length)];
+    setKing(suit,rank);
+  }
+}
+
+function setKing(suit,rank) {
+  $('kings').classList.add('hidden');
+
+  called = (rank === 14 ? 'Roi' : 'Dame') + ' de ' + suit;
+  let id = suit + (rank - 1);
+  partner = -1;
+
+  for (let i = 0; i < 5; i++) {
+    if (hands[i].some(c => c.id === id)) partner = i;
+  }
+
+  if (partner === taker) partner = -1;
+
+  log(name(taker) + ' appelle ' + called + '.');
+
+  if (partner === -1) {
+    log('Carte appelée au chien : le preneur jouera seul.');
+  }
+
+  $('centerInfo').textContent = 'Carte appelée : ' + called;
+  prepareDog();
+}
+
+function prepareDog() {
+  if (contract === 3) {
+    won[taker].push(...dog);
+    log('Garde sans : chien attribué au preneur.');
+    beginPlay();
+    return;
+  }
+
+  if (contract === 4) {
+    log('Garde contre : chien attribué à la défense.');
+    beginPlay();
+    return;
+  }
+
+  phase = 'dog';
+
+  if (taker === 0) {
+    hands[0].push(...dog);
+    $('dogControls').classList.remove('hidden');
+    $('dogText').textContent =
+      'Sélectionnez exactement 3 cartes à écarter.';
+
+    let z = $('dogCards');
+    z.replaceChildren();
+    dog.forEach(c => z.appendChild(card(c)));
+
+    $('dogDone').disabled = true;
+    say('Choisissez trois cartes pour votre écart.');
+    render();
+  } else {
+    hands[taker].push(...dog);
+
+    let eligible = hands[taker]
+      .filter(c => canDiscard(c,hands[taker]));
+
+    let out = eligible.slice(0,3);
+
+    for (let c of out) {
+      hands[taker].splice(hands[taker].indexOf(c),1);
+    }
+
+    won[taker].push(...out);
+    log(name(taker) + ' prend le chien et fait son écart.');
+    beginPlay();
+  }
+}
+
+function canDiscard(c,hand) {
+  if (c.rank === 14 && c.suit !== 'Atout') return false;
+  if (['T1','T21','E'].includes(c.id)) return false;
+  if (c.suit !== 'Atout') return true;
+
+  return hand.filter(x =>
+    x.suit !== 'Atout' && x.rank !== 14
+  ).length < 3;
+}
+
+function validateDog() {
+  if (phase !== 'dog' || discard.length !== 3) return;
+
+  for (let c of discard) {
+    hands[0].splice(hands[0].indexOf(c),1);
+  }
+
+  won[0].push(...discard);
+  discard = [];
+  $('dogControls').classList.add('hidden');
+  beginPlay();
+}
+
+function beginPlay() {
+  phase = 'play';
+  leader = 0;
+  turn = leader;
+  trickNumber = 1;
+  trick = [];
+
+  $('centerTitle').textContent = 'Pli 1 / 15';
+  $('centerInfo').textContent =
+    'Contrat : ' + labels[contract] + ' — ' + called;
+
+  log('Début du jeu.');
+  render();
+  advanceTurn();
+}
+
+function highestTrump() {
+  return Math.max(0,...trick
+    .filter(x => x.card.suit === 'Atout')
+    .map(x => x.card.rank));
+}
+
+function ally(a,b) {
+  return a === b ||
+    (partner >= 0 &&
+    ((a === taker && b === partner) ||
+     (b === taker && a === partner)));
+}
+
+function legal(h,i) {
+  if (!trick.length) return h.slice();
+
+  let first = trick.find(x => x.card.suit !== 'Excuse');
+  if (!first) return h.slice();
+
+  let suit = first.card.suit;
+  let follow = h.filter(c => c.suit === suit);
+  let excuse = h.filter(c => c.suit === 'Excuse');
+
+  if (follow.length) {
+    if (suit === 'Atout') {
+      let high = highestTrump();
+      let higher = follow.filter(c => c.rank > high);
+      return [...(higher.length ? higher : follow),...excuse];
+    }
+    return [...follow,...excuse];
+  }
+
+  let trumps = h.filter(c => c.suit === 'Atout');
+  if (!trumps.length) return h.slice();
+
+  let winner = winningPlay();
+
+  if (winner && ally(i,winner.player)) {
+    return [...trumps,...excuse,
+      ...h.filter(c => c.suit !== 'Atout')];
+  }
+
+  let high = highestTrump();
+  let higher = trumps.filter(c => c.rank > high);
+
+  return [...(higher.length ? higher : trumps),...excuse];
+}
+
+function winningPlay() {
+  let first = trick.find(x => x.card.suit !== 'Excuse');
+  if (!first) return trick[0];
+
+  let best = first;
+
+  for (let x of trick) {
+    let a = x.card, b = best.card;
+    if (a.suit === 'Excuse') continue;
+
+    if (a.suit === 'Atout' &&
+       (b.suit !== 'Atout' || a.rank > b.rank)) {
+      best = x;
+    } else if (a.suit === b.suit && a.rank > b.rank) {
+      best = x;
     }
   }
-  afficherDos();
-  pliTermine = true;
-  document.getElementById("pliSuivant").disabled = false;
-  message("Les 5 cartes sont sur le tapis. Pli suivant !");
+
+  return best;
 }
 
-function viderPli() {
-  document.getElementById("pli").replaceChildren();
-  cartesPosees = [];
-  pliTermine = false;
-  document.getElementById("pliSuivant").disabled = true;
-  if (mains[0].length) {
-    message("Nouveau pli : sélectionnez une carte.");
+function render() {
+  for (let i = 0; i < 5; i++) {
+    let z = $('back' + i);
+    z.replaceChildren();
+
+    if (i > 0 && hands[i]) {
+      for (let k = 0; k < Math.min(4,hands[i].length); k++) {
+        let e = document.createElement('span');
+        e.className = 'back';
+        z.appendChild(e);
+      }
+    }
+
+    $('info' + i).textContent = hands[i]
+      ? hands[i].length + ' cartes' +
+        (i === taker ? ' — preneur' : '')
+      : '';
+  }
+
+  let h = $('hand');
+  h.replaceChildren();
+
+  if (!hands.length) {
+    h.textContent = 'Distribuez pour commencer.';
+    return;
+  }
+
+  $('handTitle').textContent =
+    'Votre main — ' + hands[0].length + ' cartes';
+
+  let allowed = phase === 'play' && turn === 0
+    ? legal(hands[0],0) : [];
+
+  for (let c of hands[0]) {
+    let isDiscard = discard.includes(c);
+
+    let enabled = phase === 'dog'
+      ? (isDiscard || canDiscard(c,hands[0]))
+      : allowed.includes(c);
+
+    let e = card(c,
+      phase === 'dog' || phase === 'play' ? chooseCard : null,
+      !enabled);
+
+    if (selected === c || isDiscard) {
+      e.classList.add('selected');
+    }
+
+    h.appendChild(e);
+  }
+
+  $('play').disabled = !(
+    phase === 'play' && turn === 0 &&
+    selected && allowed.includes(selected)
+  );
+
+  $('help').textContent = phase === 'dog'
+    ? 'Écart sélectionné : ' + discard.length + '/3'
+    : phase === 'play'
+    ? 'Les cartes grisées sont interdites pour ce pli.'
+    : 'Les cartes seront jouables après les enchères.';
+}
+
+function chooseCard(c) {
+  if (phase === 'dog') {
+    if (discard.includes(c)) {
+      discard = discard.filter(x => x !== c);
+    } else if (discard.length < 3 &&
+               canDiscard(c,hands[0])) {
+      discard.push(c);
+    }
+    $('dogDone').disabled = discard.length !== 3;
+  } else if (phase === 'play' && turn === 0) {
+    selected = c;
+  }
+
+  render();
+}
+
+function advanceTurn() {
+  if (phase !== 'play') return;
+
+  if (trick.length === 5) {
+    finishTrick();
+    return;
+  }
+
+  if (turn === 0) {
+    selected = null;
+    render();
+    say('À vous de jouer : choisissez une carte autorisée.');
   } else {
-    message("Démonstration terminée : 15 plis joués.");
+    let options = legal(hands[turn],turn);
+    let c = options[Math.floor(Math.random()*options.length)];
+    place(turn,c);
+    advanceTurn();
   }
 }
 
-function reinitialiser() {
-  mains = [];
-  chien = [];
-  selection = -1;
-  cartesPosees = [];
-  pliTermine = false;
-  document.getElementById("mainCartes").textContent =
-    "Distribuez pour voir votre main.";
-  document.getElementById("pli").replaceChildren();
-  for (let i = 1; i < 5; i++) {
-    document.getElementById("dos" + i).replaceChildren();
-  }
-  document.getElementById("jouer").disabled = true;
-  document.getElementById("pliSuivant").disabled = true;
-  message("Cliquez sur Mélanger et distribuer.");
+function place(i,c) {
+  hands[i].splice(hands[i].indexOf(c),1);
+  trick.push({player:i,card:c});
+
+  let wrap = document.createElement('div');
+  wrap.className = 'played';
+
+  let t = document.createElement('div');
+  t.textContent = name(i);
+
+  wrap.append(t,card(c));
+  $('trick').append(wrap);
+
+  turn = (turn + 1) % 5;
+  render();
 }
+
+function humanPlay() {
+  if (phase !== 'play' || turn !== 0 ||
+      !selected ||
+      !legal(hands[0],0).includes(selected)) return;
+
+  place(0,selected);
+  selected = null;
+  advanceTurn();
+}
+
+function finishTrick() {
+  phase = 'pause';
+  let winner = winningPlay().player;
+
+  for (let x of trick) {
+    if (x.card.suit === 'Excuse' && trickNumber !== 15) {
+      excuseOwners.push({owner:x.player,winner});
+      won[x.player].push(x.card);
+    } else {
+      won[winner].push(x.card);
+    }
+  }
+
+  log('Pli ' + trickNumber + ' remporté par ' +
+      name(winner) + '.');
+
+  say(name(winner) + ' remporte le pli ' +
+      trickNumber + '.');
+
+  leader = winner;
+
+  $('next').textContent = trickNumber === 15
+    ? 'Voir le résultat' : 'Pli suivant';
+
+  $('next').classList.remove('hidden');
+  $('play').disabled = true;
+}
+
+function nextTrick() {
+  if (phase !== 'pause') return;
+
+  $('next').classList.add('hidden');
+
+  if (trickNumber === 15) {
+    endGame();
+    return;
+  }
+
+  trickNumber++;
+  trick = [];
+  turn = leader;
+  phase = 'play';
+
+  $('trick').replaceChildren();
+  $('centerTitle').textContent =
+    'Pli ' + trickNumber + ' / 15';
+
+  advanceTurn();
+}
+
+function points(c) {
+  if (['T1','T21','E'].includes(c.id) ||
+      (c.rank === 14 && c.suit !== 'Atout')) return 4.5;
+
+  if (c.rank === 13 && c.suit !== 'Atout') return 3.5;
+  if (c.rank === 12 && c.suit !== 'Atout') return 2.5;
+  if (c.rank === 11 && c.suit !== 'Atout') return 1.5;
+
+  return .5;
+}
+
+function endGame() {
+  phase = 'done';
+
+  let team = partner >= 0 ? [taker,partner] : [taker];
+  let own = team.flatMap(i => won[i]);
+
+  let score = own.reduce((n,c) => n + points(c),0);
+  let bouts = own.filter(c =>
+    ['T1','T21','E'].includes(c.id)).length;
+
+  let target = [56,51,41,36][bouts];
+  let diff = score - target;
+  let success = diff >= 0;
+  let mult = [0,1,2,4,6][contract];
+
+  let basic = (25 + Math.abs(diff)) *
+    mult * (success ? 1 : -1);
+
+  $('result').textContent =
+    (success ? 'Contrat réussi ! ' : 'Contrat chuté ! ') +
+    score.toFixed(1) + ' points, ' +
+    bouts + ' bout(s), objectif ' + target +
+    '. Score de base : ' +
+    (basic > 0 ? '+' : '') + basic + '.';
+
+  say('Donne terminée ! ' +
+    (success ? 'Bravo au camp du preneur.' :
+    'La défense gagne.'));
+
+  log('Résultat provisoire : ' + $('result').textContent);
+
+  $('centerTitle').textContent = 'Donne terminée';
+  $('centerInfo').textContent =
+    'Score de base sans primes ni compensation de l’Excuse.';
+
+  render();
+}
+
+$('new').onclick = start;
+
+document.querySelectorAll('[data-bid]').forEach(b => {
+  b.onclick = () => humanBid(Number(b.dataset.bid));
+});
+
+$('dogDone').onclick = validateDog;
+$('play').onclick = humanPlay;
+$('next').onclick = nextTrick;
 </script>
 </body>
 </html>
